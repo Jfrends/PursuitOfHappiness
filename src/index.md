@@ -1,0 +1,255 @@
+---
+toc: false
+---
+
+<div class="hero">
+  <h1>Chasing Happiness</h1>
+  <h2>Exploring the relationship between a country's life evaluation score and human migration patterns around the world.</h2>
+</div>
+
+## Happiness Flows Overview
+
+To begin, let's look at the absolute volume of migration flows categorized by happiness levels. Do people generally move toward happier countries? 
+
+*(Placeholder: Add your analysis or context about what this bar chart specifically highlights regarding net migration patterns.)*
+
+```js
+import { simpleBar } from "./components/simpleBar.js";
+import { buildHappinessFlows } from "./data/happinessFlows.js"; 
+
+const migrationData = await FileAttachment("./data/migration.csv").csv({ typed: true });
+const happinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
+
+// Process the raw datasets into the flows array
+const flowsData = buildHappinessFlows({ migrationData, happinessData });
+
+// Pass the processed data to the chart
+display(await simpleBar(flowsData, width));
+```
+
+---
+
+## Regional & Adjacent Disparities
+
+While global trends tell one story, regional neighbors often have stark contrasts. The chart below examines countries alongside their geographic neighbors to identify localized migration drivers.
+
+*(Placeholder: Explain what the adjacency chart demonstrates. For example, mention how disparities in GDP or social support between bordering nations trigger regional movement.)*
+
+```js
+import { AdjacentPlot } from "./components/adjacentPlot.js";
+import { processAdjacent } from "./data/adjacent.js"; 
+import { processAdjacency } from "./data/adjacency.js";
+import { buildHappy } from "./data/happy.js"; 
+import { processHappiness } from "./data/processHappiness.js";
+import { processPopulation } from "./data/population.js";
+import { buildMigration } from "./data/migration.js";
+
+const MIGRATION = await FileAttachment("./data/migration.csv").csv({ typed: true });
+const migration = buildMigration(MIGRATION);
+
+const rawPopData = await FileAttachment("./data/population.csv").csv({ typed: true });
+const POPULATION = processPopulation(rawPopData);
+
+const rawHappinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
+const HAPPINESS = processHappiness(rawHappinessData);
+const happy = buildHappy(HAPPINESS);
+
+const rawAdjData = await FileAttachment("./data/adjacency.csv").csv({ typed: true });
+const ADJACENCY = processAdjacency(rawAdjData);
+
+const adjacent = processAdjacent({happy, POPULATION, ADJACENCY, migration});
+
+const selectedYear = 2024; 
+
+// Pass width and year inside an object
+display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
+```
+
+---
+
+## The Happiness Distribution
+
+How wide is the gap between the happiest and least happy populations? This candle chart visualizes the distribution and variance of life evaluation scores across different regions.
+
+*(Placeholder: Provide context on the spread of the data. Are certain continents tightly clustered together, while others show massive inequality in life evaluation?)*
+
+```js
+import { CandleChart } from "./components/candleChart.js";
+import { buildHappy } from "./data/happy.js"; 
+import { processHappiness } from "./data/processHappiness.js";
+
+// Load the raw data file
+const rawHappinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
+
+// Process it into the finalized HAPPINESS table
+const HAPPINESS = processHappiness(rawHappinessData);
+const happy = buildHappy(HAPPINESS);
+
+// Pass the processed data to the chart
+display(await CandleChart(happy, width));
+```
+
+---
+
+## Connecting Migration to Happiness
+
+By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
+
+*(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)*
+
+```js
+import { migrationPlot } from "./components/migrationPlot.js";
+import { buildMigrationVsHappiness } from "./data/migrationVsHappiness.js"
+
+const migData = await FileAttachment("./data/migration.csv").csv({ typed: true });
+const happinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
+const countryData = await FileAttachment("./data/country_codes.csv").csv({ typed: true });
+
+// Process the raw datasets into the flows array
+const mvh = buildMigrationVsHappiness({ migData, happinessData, countryData });
+
+// Pass the processed data to the chart
+display(await migrationPlot(mvh, width));
+```
+
+---
+
+## Interactive Global Explorer
+
+Explore the data yourself. Use the interactive 3D globe below to select individual countries, view their specific happiness scores, and trace the direct migration vectors into and out of their borders.
+
+*(Placeholder: Give the user brief instructions. e.g., "Hover over a country to see its score, click to lock it in and view migration vectors, and use the search bar to find a specific nation.")*
+
+<div class="card" style="display: flex; justify-content: center; background: #111; position: relative;">
+  <span id="viz-container"></span>
+</div>
+
+```js
+// IMPORTS
+import * as d3 from "npm:d3";
+import * as topojson from "npm:topojson-client";
+import { Graph } from "./components/Graph.js";
+import { Search } from "./components/Search.js";
+
+import { buildHappy } from "./data/happy.js"; 
+import { processHappiness } from "./data/processHappiness.js";
+import { buildMigration } from "./data/migration.js";
+
+// LOAD DATA
+const TOPO = ({
+  low:   await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json').then(r => r.json()),
+  high:  await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json())
+});
+
+const GLOBE = {
+  countries: topojson.feature(TOPO.high, TOPO.high.objects.countries),
+  borders: topojson.mesh(TOPO.high, TOPO.high.objects.countries, (a, b) => a !== b)
+};
+
+const rawHappinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
+const HAPPINESS = processHappiness(rawHappinessData);
+const happy = buildHappy(HAPPINESS);
+
+const MIGRATION = await FileAttachment("./data/migration.csv").csv({ typed: true });
+const migration = buildMigration(MIGRATION);
+
+// BUILD CONFIG
+const preview = { 
+  width: width, 
+  height: width, 
+  radius: width / 2, 
+  gap: 20 
+};
+
+const variables = {
+  background: { color: '#111111' },
+  globe: {
+    start: [-95, -38, 0], 
+    radius: (preview.radius * 0.55) - preview.gap,
+    border: preview.gap,
+    colors: {
+      ocean: '#0A1628', land: '#1A4D2E', borders: '#FFFFFF26',
+      graticule: '#FFFFFF1A', atmosphere: '#378ADD', hovered: '#FFFFFF',
+      selected: '#FFFFFF', outline: '#FFFFFF', scale: ['#272727', '#FFD700'] 
+    },
+    stroke: { outline: 3.5, borders: 0.5, graticule: 0.5, opacity: 0.75 }
+  },
+  rays: {
+    radius: { inner: preview.radius * 0.55, outer: preview.radius - preview.gap },
+    angle: 0.005,
+    fonts: { labels: { size: 16 } },
+    scale: {
+      function: d3.scaleLinear().domain([0, 10]).range([preview.radius * 0.55, preview.radius]),
+      domain: [2, 10], values: [2, 4, 6, 8, 10], offset: 14
+    },
+    colors: {
+      rays: { active: ['#F5C036', '#FBE08A', '#DFA020'], inactive: ['#8A8A8A', '#D4D4D4', '#737373'] },
+      scale: ["#BBBBBB", "#444444"], error: '#AAAAAA', labels: '#111111', hovered: '#f73b2e'
+    },
+    stroke: {
+      rays: { width: 0.8, opacity: 0.6, fill: 0.82 },
+      error: { opacity: 0.8 }, scale: { width: 0.5, style: [3, 4] }, labels: { width: 0.5 }
+    }
+  },
+  bars: {
+    colors: [ 
+      { key: "gdp", color: "#e63946" }, { key: "socialSupport", color: "#f4a261" },
+      { key: "health", color: "#2a9d8f" }, { key: "freedom", color: "#457b9d" },
+      { key: "generosity", color: "#a8dadc" }, { key: "corruption", color: "#e9c46a" },
+      { key: "dystopia", color: "#8ecae6" } 
+    ]
+  },
+  vectors: { density: 5, weightRange: [0.5, 16] },
+  triangles: { increase: '#4CAF50', decrease: '#F44336' } 
+};
+
+const config = { preview, variables, TOPO, GLOBE };
+
+// INITIALIZE AND RENDER
+const myDashboard = new Graph(happy, migration, 2024, config);
+const searchBar = new Search(myDashboard.globe, myDashboard.svg.node().parentNode, config);
+
+display(myDashboard.svg.node());
+```
+
+<style>
+/* Dashboard Hero Styling */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--sans-serif);
+  margin: 4rem 0 4rem;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.hero h1 {
+  margin: 1rem 0;
+  padding: 1rem 0;
+  max-width: none;
+  font-size: 14vw;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero h2 {
+  margin: 0;
+  max-width: 34em;
+  font-size: 20px;
+  font-style: initial;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--theme-foreground-muted);
+}
+
+@media (min-width: 640px) {
+  .hero h1 {
+    font-size: 90px;
+  }
+}
+</style>
