@@ -329,7 +329,7 @@ display(myDashboard.svg.node());
   </p>
 
   <p>
-    This, the takeaway from this graphic is simple: Remember *why* people move: for reasons we hold to be self-evident—for reasons we hold to be <i>unalienable</i>. <i>Life</i>, <i>liberty</i>, and ...
+    This, the takeaway from this graphic is simple: Remember <i>why</i> people move: for reasons we hold to be self-evident—for reasons we hold to be <i>unalienable</i>. <i>Life</i>, <i>liberty</i>, and ...
   </p>
 
   <p>
