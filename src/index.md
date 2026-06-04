@@ -260,6 +260,18 @@ display(myDashboard.svg.node());
 
 </div>
 
+-- 
+
+## How National Condititons Connect with Happiness
+
+TENTATIVE SUMMARY DON"T KNOW WHAT WILL GO HERE 
+
+The visualizations of migration shows that the migrant stock is often directed toward countries with higher reports of well-being, but they do not explain why those countries score higher. 
+
+To better understnad what happiness scores may represent, we cmpare life evaluation with country-level conditions commonly discussed in the World Happiness Report, including economic output, life expectancy.....? etc
+
+
+
 <style>
 
 
@@ -332,7 +344,7 @@ display(myDashboard.svg.node());
   border: 1px solid #2a2a2a;
 }
 .intro-card {
-  max-width: 760px;
+  max-width: 850px;
   margin: -1.5rem auto 4rem;
   padding: 1.5rem 1.75rem;
   border-left: 4px solid #f5c036;
