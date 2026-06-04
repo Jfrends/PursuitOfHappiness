@@ -189,6 +189,7 @@ display(await CandleChart(happy, width));
 </div>
 
 <section class="intro-card">
+  <h2>Migration Ratio and National Conditions</h2>
   <p>
     We have argued so far that people are in fact moving towards happier areas, but what makes a country happy? This scatter plot allows you to explore a few of the various factors that impact how happy a country and discover how they have changed, or remained the same, over time. 
   </p>
@@ -219,7 +220,7 @@ display(migrationPlot(mvhData, width));
 
 <div class="globe-instructions">
 
-[1] [2] [3] [4] [6] [7] [8]
+Sources: [1] [2] [3] [4] [6] [7] [8]
 
 </div>
 
@@ -352,7 +353,6 @@ display(myDashboard.svg.node());
   </p>
 </section>
 
-<div>
 
 [1] [World Happiness Report](https://data.worldhappiness.report/)  
 [2] [United Nations](https://www.un.org/development/desa/pd/content/international-migrant-stock)  
@@ -363,8 +363,54 @@ display(myDashboard.svg.node());
 [7] [OurWorldInData](https://ourworldindata.org/life-expectancy)  
 [8] [OurWorldInData](https://ourworldindata.org/trust)  
   
+---
 
-</div>
+<section class="sources-card" id="sources">
+  <h2>Sources</h2>
+
+  <ol>
+    <li>
+      <a href="https://data.worldhappiness.report/" target="_blank" rel="noopener noreferrer">World Happiness Report</a>
+      <span>Life evaluation scores and happiness-related indicators used to measure national well-being on a 0–10 scale.</span>
+    </li>
+    <li>
+      <a href="https://www.un.org/development/desa/pd/content/international-migrant-stock" target="_blank" rel="noopener noreferrer">United Nations International Migrant Stock</a>
+      <span>Country-to-country migrant stock data used to compare origin and destination countries.</span>
+    </li>
+    <li>
+      <a href="https://data.worldbank.org/indicator/SP.POP.TOT" target="_blank" rel="noopener noreferrer">World Bank Population, Total</a>
+      <span>Population totals used to normalize migration measures by country size.</span>
+    </li>
+    <li>
+      <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD" target="_blank" rel="noopener noreferrer">World Bank GDP per Capita</a>
+      <span>GDP per capita indicator used as one national condition associated with life evaluation.</span>
+    </li>
+    <li>
+      <a href="https://github.com/P1sec/country_adjacency" target="_blank" rel="noopener noreferrer">P1sec Country Adjacency Dataset</a>
+      <span>Country adjacency data used to classify migration toward adjacent versus non-adjacent destinations.</span>
+    </li>
+    <li>
+      <a href="https://ourworldindata.org/economic-inequality" target="_blank" rel="noopener noreferrer">Our World in Data: Economic Inequality</a>
+      <span>Background and data context for income inequality and the Gini coefficient.</span>
+    </li>
+    <li>
+      <a href="https://ourworldindata.org/life-expectancy" target="_blank" rel="noopener noreferrer">Our World in Data: Life Expectancy</a>
+      <span>Background and data context for life expectancy as a national condition.</span>
+    </li>
+    <li>
+      <a href="https://ourworldindata.org/trust" target="_blank" rel="noopener noreferrer">Our World in Data: Trust</a>
+      <span>Background and data context for interpersonal trust.</span>
+    </li>
+    <li>
+      <a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">D3.js</a>,
+      <a href="https://observablehq.com/plot/" target="_blank" rel="noopener noreferrer">Observable Plot</a>,
+      and
+      <a href="https://observablehq.com/framework/" target="_blank" rel="noopener noreferrer">Observable Framework</a>
+      <span>Visualization libraries and publishing tools used to build the interactive article.</span>
+    </li>
+  </ol>
+</section>
+
 
 <style>
 
@@ -480,6 +526,46 @@ display(myDashboard.svg.node());
 .dark-chart-card svg {
   max-width: 100%;
   height: auto;
+}
+.sources-card {
+  max-width: 900px;
+  margin: 2rem auto 5rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid #f5c036;
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 12px;
+  color: var(--theme-foreground);
+}
+
+.sources-card h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.sources-card ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.sources-card li {
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+}
+
+.sources-card li span {
+  display: block;
+  color: var(--theme-foreground-muted);
+  margin-top: 0.2rem;
+}
+
+.sources-card a {
+  color: #f5c036;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sources-card a:hover {
+  text-decoration: underline;
 }
 
 
