@@ -51,8 +51,7 @@ toc: false
 
 <div class="hero">
 </div>
-<div class="hero">
-</div>
+
 <div class="hero">
 </div>
 
@@ -85,13 +84,8 @@ display(await simpleBar(flowsData, width));
 ```
 
 </div>
-
 </section>
 
-<div class="hero">
-</div>
-<div class="hero">
-</div>
 
 ---
 
