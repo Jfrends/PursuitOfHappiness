@@ -4,22 +4,25 @@ export function migrationPlot(migrationVsHappiness, width) {
   const height = 500;
   const margin = { top: 60, right: 150, bottom: 50, left: 60 }; 
 
-  // 1. Metric Configurations (Trimmed to only Migration & GDP)
+  // 1. Metric Configurations
   const metricsConfig = {
+    gdp_per_capita: { label: 'GDP per Capita', scaleType: 'log', format: d3.format(',.0f') },
+    life_expectancy: { label: 'Life Expectancy (Years)', scaleType: 'linear', format: d3.format('.1f') },
     migration_ratio: { label: 'Migration Ratio', scaleType: 'log', format: d3.format('~g') },
-    gdp_per_capita: { label: 'GDP per Capita', scaleType: 'log', format: d3.format(',.0f') }
+    interpersonal_trust: { label: 'Interpersonal Trust (%)', scaleType: 'linear', format: d3.format('.1f') },
+    gini_coefficient: { label: 'Income Inequality (Gini)', scaleType: 'linear', format: d3.format('.3f') }
   };
 
   const rows = migrationVsHappiness;
 
   // --- PLAYBACK STATE ---
-  let currentMetric = 'migration_ratio';
+  let currentMetric = 'gdp_per_capita';
   let availableYears = [];
   let yearIndex = 0;
   let currentYear = null;
   let playing = false;
   let timer = null;
-  const transitionSpeed = 600; // 1 second per step
+  const transitionSpeed = 600; // Normal playback speed
 
   // Create UI Container
   const wrapper = d3.create('div')
@@ -65,8 +68,8 @@ export function migrationPlot(migrationVsHappiness, width) {
     .style('align-items', 'center')
     .style('border-left', '1px solid #444')
     .style('padding-left', '15px')
-    .style('padding-right', '20px') // <-- Added right padding here
-    .style('margin-left', 'auto'); // Push dropdown to the right
+    .style('padding-right', '20px') 
+    .style('margin-left', 'auto'); 
 
   dropdownGroup.append('span')
     .style('color', '#aaa')
@@ -172,7 +175,19 @@ export function migrationPlot(migrationVsHappiness, width) {
       return true;
     });
 
-    availableYears = Array.from(new Set(validRows.map(d => +d.Year))).sort(d3.ascending);
+    // 1. Group data by Year and count the number of data points
+    const pointsPerYear = d3.rollup(validRows, v => v.length, d => +d.Year);
+
+    // 2. Extract only the years that have more than 20 data points
+    availableYears = Array.from(pointsPerYear.entries())
+      .filter(([year, count]) => count > 20) // Change this threshold as needed
+      .map(([year]) => year)
+      .sort(d3.ascending);
+
+    // Safety check: if no years have > 20 points, default to the most recent year available
+    if (availableYears.length === 0 && validRows.length > 0) {
+       availableYears = [d3.max(validRows, d => +d.Year)];
+    }
 
     if (!availableYears.includes(currentYear)) {
       currentYear = availableYears[availableYears.length - 1]; 
@@ -181,7 +196,6 @@ export function migrationPlot(migrationVsHappiness, width) {
     yearIndex = availableYears.indexOf(currentYear);
     yearDisplay.text(currentYear);
 
-    // Update the scrubber bounds based on available data
     scrubber
       .attr('min', 0)
       .attr('max', availableYears.length - 1)
@@ -189,10 +203,10 @@ export function migrationPlot(migrationVsHappiness, width) {
   }
 
   // --- RENDER ENGINE ---
-  function updateChart() {
+  // Added 'speed' parameter so we can tell it to go fast when scrubbing!
+  function updateChart(speed = transitionSpeed) {
     const config = metricsConfig[currentMetric];
     
-    // 1. Calculate the GLOBAL extent for the X-axis (keeps the axis static)
     const allValidRows = rows.filter((d) => {
       const xVal = d[currentMetric];
       if (xVal == null || xVal === "") return false;
@@ -227,7 +241,6 @@ export function migrationPlot(migrationVsHappiness, width) {
 
     xLabel.text(config.label);
 
-    // 2. Filter for only the CURRENT year for the scatter dots
     const currentRows = allValidRows.filter(d => +d.Year === +currentYear && !isNaN(+d.life_evaluation));
 
     // Bind Data to Scatter Dots
@@ -266,13 +279,15 @@ export function migrationPlot(migrationVsHappiness, width) {
             d3.select(this).transition().duration(100).attr('r', 5).attr('opacity', 0.7).attr('stroke', 'none');
             tooltip.style('visibility', 'hidden');
           })
-          .call(enter => enter.transition().duration(transitionSpeed).attr('opacity', 0.7)),
+          .call(enter => enter.transition().duration(speed).attr('opacity', 0.7)),
         
-        (update) => update.transition().duration(transitionSpeed).ease(d3.easeLinear) 
+        // Explicitly set opacity to 0.7 here so they never get stuck as ghosts!
+        (update) => update.transition().duration(speed).ease(d3.easeLinear) 
           .attr('cx', (d) => xScale(+d[currentMetric]))
-          .attr('cy', (d) => yWithMargin(+d.life_evaluation)),
+          .attr('cy', (d) => yWithMargin(+d.life_evaluation))
+          .attr('opacity', 0.7), 
         
-        (exit) => exit.transition().duration(transitionSpeed / 2).attr('opacity', 0).remove()
+        (exit) => exit.transition().duration(speed / 2).attr('opacity', 0).remove()
       );
   }
 
@@ -294,21 +309,9 @@ export function migrationPlot(migrationVsHappiness, width) {
     currentYear = availableYears[yearIndex];
     yearDisplay.text(currentYear);
     
-    // Use a faster transition when manually scrubbing for snappier feedback
-    svg.selectAll('circle.plot-dot')
-       .transition().duration(200).ease(d3.easeCubicOut)
-       .attr('cx', (d) => {
-         const config = metricsConfig[currentMetric];
-         const allValidRows = rows.filter((r) => r[currentMetric] != null && r[currentMetric] !== "");
-         const xExtent = d3.extent(allValidRows, r => +r[currentMetric]);
-         if (config.scaleType === 'log' && xExtent[0] <= 0) xExtent[0] = 0.01;
-         const xScale = (config.scaleType === 'log' ? d3.scaleLog() : d3.scaleLinear())
-           .domain(xExtent).range([margin.left, width - margin.right]).nice();
-         return xScale(+d[currentMetric]);
-       })
-       .attr('cy', (d) => yWithMargin(+d.life_evaluation));
-       
-    updateChart();
+    // Instead of doing manual transition math here, just call updateChart 
+    // and tell it to go really fast (50ms)!
+    updateChart(50);
   });
 
   function stepForward() {
@@ -321,28 +324,25 @@ export function migrationPlot(migrationVsHappiness, width) {
     }
     currentYear = availableYears[yearIndex];
     yearDisplay.text(currentYear);
-    scrubber.property('value', yearIndex); // Sync scrubber handle with animation
-    updateChart();
+    scrubber.property('value', yearIndex); 
+    updateChart(); // Uses default speed (600ms)
   }
 
   playButton.on('click', () => {
     if (playing) {
-      // Pause
       playing = false;
       playButton.text('▶ Play').style('background', '#007BFF');
       if (timer) timer.stop();
     } else {
-      // Play
       playing = true;
       playButton.text('⏸ Pause').style('background', '#dc3545');
       
-      // If at the end, restart from the beginning
       if (yearIndex >= availableYears.length - 1) {
         yearIndex = -1; 
       }
       
-      stepForward(); // Take first step instantly
-      timer = d3.interval(stepForward, transitionSpeed + 100); 
+      stepForward(); 
+      timer = d3.interval(stepForward, transitionSpeed + 50); 
     }
   });
 
