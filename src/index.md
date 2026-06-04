@@ -136,6 +136,11 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 </section>
 
 ---
+<div class="hero">
+</div>
+<div class="hero">
+</div>
+
 <section class="section-grid">
 <div class="section-copy">
 <h2>Over Time</h2>
@@ -171,6 +176,8 @@ display(await CandleChart(happy, width));
 </div>
 </section>
 
+<div class="hero">
+</div>
 <div class="hero">
 </div>
 
