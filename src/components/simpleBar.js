@@ -24,7 +24,7 @@ export function simpleBar(happinessFlows, width = 600) {
     );
 
   const chartWidth = Math.min(width * 0.55, 680);
-  const height = 300;
+  const height = 400;
 
   const margin = {
     top: 58,
