@@ -13,7 +13,7 @@ To begin, let's look at the absolute volume of migration flows categorized by ha
 
 The total volume of migration toward happier countries, that is, countries with the higher life evaluation score, is substantially larger than the volume moving away from happier countries. The pattern suggests that many high-migration destinations are also countries who score higher on the World Happiness Reports's 0-10 life evaluation scale. Although the visualization is not meant to imply a causation, the association between happiness and migration patterns. A higher life evaluation score which summarizes country-level conditions may also affect migration decisions, such as political stability, economic opportunity, safety, and other factors. Allowing this to be our starting point, we see that migration flows are not randomly distributed across the global happiness landscape.
 
-<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
+<div class="card dark-chart-card">
 
 ```js
 import { simpleBar } from "./components/simpleBar.js";
@@ -237,6 +237,15 @@ display(myDashboard.svg.node());
 </div>
 
 <style>
+.dark-chart-card {
+  display: flex;
+  justify-content: center;
+  background: #111;
+  overflow: visible;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+}
 /* Dashboard Hero Styling */
 .hero {
   display: flex;

@@ -18,15 +18,14 @@ export function simpleBar(happinessFlows, width = 600) {
     totalMigrants: Number(d.totalMigrants)
   }));
 
-  const chartWidth = Math.min(width * 0.9, 900);
+  const chartWidth = Math.min(width * 0.78, 760);
 
   return vl
     .layer(
-      // Main bars
       vl
         .markBar({
-          cornerRadiusTopLeft: 4,
-          cornerRadiusTopRight: 4
+          cornerRadiusTopLeft: 5,
+          cornerRadiusTopRight: 5
         })
         .data(data)
         .encode(
@@ -34,17 +33,14 @@ export function simpleBar(happinessFlows, width = 600) {
             .x()
             .fieldN("directionLabel")
             .title(null)
-            .sort([
-              "Toward less happy countries",
-              "Toward happier countries"
-            ])
+            .sort(["Toward less happy countries", "Toward happier countries"])
             .axis({
               labelAngle: 0,
               labelFontSize: 13,
-              labelLimit: 220,
-              labelPadding: 8
+              labelColor: "#d8d8d8",
+              labelPadding: 8,
+              labelLimit: 240
             }),
-
           vl
             .y()
             .fieldQ("totalMigrants")
@@ -52,23 +48,20 @@ export function simpleBar(happinessFlows, width = 600) {
             .axis({
               format: "~s",
               grid: true,
+              labelColor: "#d8d8d8",
               labelFontSize: 12,
+              titleColor: "#d8d8d8",
               titleFontSize: 13,
               titlePadding: 12
             }),
-
           vl
             .color()
             .fieldN("directionLabel")
             .legend(null)
             .scale({
-              domain: [
-                "Toward less happy countries",
-                "Toward happier countries"
-              ],
-              range: ["#4E79A7", "#F28E2B"]
+              domain: ["Toward less happy countries", "Toward happier countries"],
+              range: ["#6EA8FE", "#F5C036"]
             }),
-
           vl.tooltip([
             {
               field: "directionLabel",
@@ -78,44 +71,43 @@ export function simpleBar(happinessFlows, width = 600) {
             {
               field: "totalMigrants",
               type: "quantitative",
-              title: "Total migrants",
+              title: "Migrant stock",
               format: ","
             }
           ])
         ),
 
-      // Value labels above bars
       vl
         .markText({
           dy: -8,
           fontSize: 13,
-          fontWeight: "bold"
+          fontWeight: "bold",
+          color: "#f2f2f2"
         })
         .data(data)
         .encode(
           vl
             .x()
             .fieldN("directionLabel")
-            .sort([
-              "Toward less happy countries",
-              "Toward happier countries"
-            ]),
+            .sort(["Toward less happy countries", "Toward happier countries"]),
           vl.y().fieldQ("totalMigrants"),
-          vl.text().fieldQ("totalMigrants").format("~s")
+          vl.text().fieldQ("totalMigrants").format(".3s")
         )
     )
     .width(chartWidth)
-    .height(360)
+    .height(300)
     .title({
-      text: "Most recorded migration is toward countries with higher life evaluations",
+      text: "Migrant stock is higher toward countries with higher life evaluations",
       subtitle:
-        "Direction is based on whether the destination country’s happiness score is higher or lower than the origin country’s score.",
+        "Destination countries are grouped by whether their happiness score is higher or lower than the origin country’s score.",
       anchor: "start",
-      fontSize: 18,
-      subtitleFontSize: 13,
-      subtitleColor: "#555",
-      offset: 14
+      fontSize: 17,
+      subtitleFontSize: 12,
+      color: "#f2f2f2",
+      subtitleColor: "#bdbdbd",
+      offset: 12
     })
+    .background("#111111")
     .config({
       view: {
         stroke: null
@@ -123,9 +115,9 @@ export function simpleBar(happinessFlows, width = 600) {
       axis: {
         labelFont: "system-ui, sans-serif",
         titleFont: "system-ui, sans-serif",
-        gridColor: "#e6e6e6",
-        domainColor: "#999",
-        tickColor: "#999"
+        gridColor: "#333333",
+        domainColor: "#777777",
+        tickColor: "#777777"
       },
       title: {
         font: "system-ui, sans-serif"
