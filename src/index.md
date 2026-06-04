@@ -142,11 +142,20 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 </section>
 
 ---
-
-<div class="hero">
+<section class="section-grid candle-section">
+<div class="section-copy callout-card">
+<p>
+    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show <i>shifts</i>.
+  </p>
+<p>
+  Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness.
+</p>
+<p>
+  See if you can tell which year 2019 is. Hover to see change in median and low values over time.
+</p>
 </div>
 
-<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
+<div class="card dark-chart-card">
 
 ```js
 import { CandleChart } from "./components/candleChart.js";
@@ -163,34 +172,19 @@ const happy = buildHappy(HAPPINESS);
 // Pass the processed data to the chart
 display(await CandleChart(happy, width));
 ```
-</div>
 
-<div class="hero">
 </div>
-
-<section class="intro-card">
-  <p>
-    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show how the story has <i>evolved</i>.
-  </p>
-  <p>
-    Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness. The color represents if the median when up (green) or down (red) from the previous year. Each bar shows a distribution for one year, from 2011–2025. Similarly, hover to see the change in values from the previous year.
-  </p>
-  <p>
-    See if you can tell which year 2019 is. Watch the change in median and low values over time.
-  </p>
 </section>
 
+
 <div class="hero">
 </div>
+<!-- </section> -->
 
 ---
 
-<!-- ## Connecting Migration to Happiness
-
-By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
-
-*(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)* -->
-
+<div class="hero">
+</div>
 <div class="hero">
 </div>
 
@@ -210,15 +204,6 @@ display(migrationPlot(mvhData, width));
 
 <div class="hero">
 </div>
-
-<section class="intro-card">
-  <p>
-    By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
-  </p>
-  <p>
-    PLACEHOLDER
-  </p>
-</section>
 
 <div class="hero">
 </div>
