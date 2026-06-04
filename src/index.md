@@ -188,8 +188,23 @@ display(await CandleChart(happy, width));
 <div class="hero">
 </div>
 
+<section class="intro-card">
+  <p>
+    We have argued so far that people are in fact moving towards happier areas, but what makes a country happy? This scatter plot allows you to explore a few of the various factors that impact how happy a country and discover how they have changed, or remained the same, over time. 
+  </p>
+
+  <p>
+    Move the scrubber or press the play button to scroll through the years worth of data and use the dropdown menu to select which variable's relationship with happiness you would like to explore.
+  </p>
+
+  <p>
+    Select between GDP, Life Expectency, Economic Inequality, Migration Ratio, and Trust metrics to discover what makes a country happy. 
+  </p>
+</section>
+
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
+
 
 ```js
 import { migrationPlot } from "./components/migrationPlot.js";
