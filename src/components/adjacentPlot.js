@@ -2,20 +2,22 @@
 import * as Plot from "npm:@observablehq/plot";
 
 export function AdjacentPlot(adjacentData, { width = 1200, year } = {}) {
-  // Plot.plot() returns a DOM element natively, so we can just return it directly!
   return Plot.plot({
-    width: width, // Use the reactive width passed from Framework
-    height: 1400,
-    marginLeft: 140,
+    width: width + 60,
+    height: 4000,
+    marginLeft: 240,
+    marginBottom: 60,
     x: { 
       label: "% of population", 
       tickFormat: d => `${(d * 100).toFixed(0)}%`, 
-      domain: [0, 1], 
-      reverse: true 
+      domain: [0, 0.6], 
+    },
+    style: {
+      fontSize: "22px"  // affects legend and axis labels
     },
     color: {
-      domain: ["staying", "to happier", "to sadder (adjacent)", "to sadder (non-adjacent)"],
-      range: ["#111111", "#FFD700", "#f97316", "#dc2626"],
+      domain: ["to happier", "to sadder (adjacent)", "to sadder (non-adjacent)"],
+      range: ["#FFD700", "#f97316", "#dc2626"],
       legend: true
     },
     marks: [
@@ -25,10 +27,10 @@ export function AdjacentPlot(adjacentData, { width = 1200, year } = {}) {
           .flatMap(d => {
             const toSadderNonAdjacent = d.toSadder - d.toSadderAdjacent;
             return [
-              { origin: d.origin, type: "staying",                  value: 1 - (d.total / d.population) },
-              { origin: d.origin, type: "to happier",               value: d.toHappier / d.population },
-              { origin: d.origin, type: "to sadder (adjacent)",     value: d.toSadderAdjacent / d.population },
               { origin: d.origin, type: "to sadder (non-adjacent)", value: toSadderNonAdjacent / d.population },
+              { origin: d.origin, type: "to sadder (adjacent)",     value: d.toSadderAdjacent / d.population },
+              { origin: d.origin, type: "to happier",               value: d.toHappier / d.population },
+              { origin: d.origin, type: "staying",                  value: 1 - (d.total / d.population) },
             ]
           }),
         { x: "value", y: "origin", fill: "type", offset: null, inset: 0 }
@@ -36,6 +38,7 @@ export function AdjacentPlot(adjacentData, { width = 1200, year } = {}) {
     ],
     y: {
       label: null,
+      // tickRotate: 45,
       padding: 0,
       domain: [...new Map(
         adjacentData

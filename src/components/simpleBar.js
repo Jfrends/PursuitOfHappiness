@@ -95,7 +95,7 @@ export function simpleBar(happinessFlows, width = 600) {
         )
     )
     .width(chartWidth)
-    .height(300)
+    .height(350)
     .title({
       text: "Migrant stock is higher toward countries with higher life evaluations",
       anchor: "start",

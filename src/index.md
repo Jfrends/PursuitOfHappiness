@@ -2,36 +2,71 @@
 toc: false
 ---
 
+<style>
+  #observablehq-main .hero h2 {
+    max-width: none;
+    width: 100%;
+  }
+
+  .intro-card p {
+    max-width:      none;
+    text-align:     justify;
+    padding-left:   2rem;
+    padding-right:  2rem;
+  }
+
+  .section-copy p {
+    text-align:     justify;
+  }
+
+  .globe-instructions p {
+    max-width: none;
+    text-align: center;
+    color: var(--theme-foreground-muted);
+    font-size: 14px;
+  }
+</style>
+
 <div class="hero">
-  <h1>Chasing Happiness</h1>
-  <h2><h2>Exploring how national happiness varies across the world, how people migrate through that landscape, and whether migration patterns tend to point toward countries with higher reported well-being.</h2></h2>
+  <h1>The Pursuit of Happiness</h1>
+  <h2>Exploring how happiness varies across the world & how people navigate through that landscape.</h2>
+</div>
+
+<div class="hero">
 </div>
 
 <section class="intro-card">
   <p>
-    We often hear of happiness as a personal feeling, something to attain, and it is simply found in ones personal way of living. However, national life evaluation scores show that well-being also has a geographic and social pattern. Some countries consistently report higher average life satisfaction than others, and those differences raise an important question: how do people move through a world filled with so many discrepencies?
+    We often hear of happiness as a personal feeling, something to attain, and it is simply found in ones personal way of living. However, national life evaluation scores show that that well-being also has a distinctly geographic and social pattern. Some countries consistently report higher average life satisfaction than others, and those differences raise an important question: how do people move through a world filled with so many disparities?
   </p>
 
   <p>
-    This article explores the relationship between national happiness and international migration. We use life evaluation scores from the World Happiness Report, where respondents rate their lives on a 0–10 scale. We then compare those scores with international migrant stock data showing where migrants live relative to their countries of origin.
+    This article explores the relationship between national happiness and international migration. We use life evaluation scores from the World Happiness Report, where respondents rate their lives on a 0–10 scale. We then compare those scores with international migration data, seeing where people choose to go...
   </p>
 
   <p>
-    Rather than claiming that happiness directly causes migration, we ask a more careful question: when people move across borders, are they moving toward countries with higher reported well-being?
+  <i>...in the pursuit of happiness</i>.
   </p>
 </section>
+
+<div class="hero">
+</div>
+<div class="hero">
+</div>
+<div class="hero">
+</div>
 
 <section class="section-grid">
 
 <div class="section-copy">
 
-<h2>Happiness Flows Overview</h2>
-
-<p>To begin, we compare international migrant stock by whether migrants are living in countries with higher or lower life evaluation scores than their countries of origin. In this chart, movement “toward happier countries” means that the destination country has a higher World Happiness Report life evaluation score than the origin country. Movement “toward less happy countries” means that the destination country has a lower life evaluation score than the origin country.</p>
-
-<p><strong>Takeaway:</strong> In the joined dataset, migrant stock toward happier countries is about 3.8× larger than migrant stock toward less happy countries.</p>
-
-<p>The chart shows an aggregate association between the happiness rating and migration: migration is not evenly distributed across the global happiness landscape. Countries with higher life evaluations are likely to contain also have other conditions that attract migrants, such as stronger economies, greater political stability, or safer living conditions</p>
+<h2>Migration Flow</h2>
+<p></p>
+<p>We compare international migrant stock by whether migrants are living in countries with higher or lower life evaluation scores than their countries of origin to start. In this chart, movement “toward happier countries” means that the destination country has a higher World Happiness Report life evaluation score than the origin country. Movement “toward less happy countries” means that the destination country has a lower life evaluation score than the origin country.</p>
+<p></p>
+<p><strong>Migration happens towards <i>happier</i> countries at about at nearly <u>four times greater a rate</u> than towards <i>less happy</i> countries.</strong></p>
+<p></p>
+<p>The chart shows an hints at a strong association between the happiness rating and migration—at least <i>in aggregate</i>.</p>
 
 </div>
 
@@ -53,17 +88,24 @@ display(await simpleBar(flowsData, width));
 
 </section>
 
-
+<div class="hero">
+</div>
+<div class="hero">
+</div>
 
 ---
 
-## Regional & Adjacent Disparities
+<section class="section-grid">
 
-While global trends tell one story, regional neighbors often have stark contrasts. The chart below examines countries alongside their geographic neighbors to identify localized migration drivers.
+<div class="section-copy">
+  <h2>Disaggregated</h2>
+  <p></p>
+  <p> Shown here is percentages of population migrating for each country in 2024, sorted from country with the lowest life evaluation score at the top to the highest at the bottom. Percentage of movement to less happy countries is also further broken out into immediately adjacent and non-immediately adjacent countries.</p>
+  <p></p>
+  <p><strong>The lower the life evluation seen, the greater the choice is clear: a <i>happier country</i> or an <i>immediately adjacent country</i>. For happier countries, the choice of movement doesn't seem to be nearly as limited by adjacency.</strong></p>
+</div>
 
-This chart breaks migration into four categories: people staying within the same country, people moving to a happier country, people moving to a less happy adjacent country, and people moving to a less happy non-adjacent country. The adjacent/non-adjacent distinction is significant because nearby countries can differ heavily in life evaluation, despite being connected by borders. A move to a neighboring country with a lower happiness score does not necessarily imply that it is irrational; it may still reflect things like lower travel costs, easier entry, temporary displacement, and others. By separating adjacent and non-adjacent movement, the chart shows that migration can be understood both geographically and statistically: that the direction of movement is related to happiness differences and also proximity. 
-
-<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
+<div class="card dark-chart-card">
 
 ```js
 import { AdjacentPlot } from "./components/adjacentPlot.js";
@@ -97,15 +139,12 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 
 </div>
 
+</section>
+
 ---
 
-## The Happiness Distribution
-
-How wide is the gap between the happiest and least happy populations? This candle chart visualizes the distribution and variance of life evaluation scores across different regions.
-
-Each of the candlesticks in this chart summarizes the distribution of country-level life evaluation scores for a single year from 2011 to 2025. The thin vertical line shows the full range from the lowest-scoring country from Q1 to Q3, and the black dot marks the median country score. The color indicates whether the overlal distribution improved or declined compared with the previous year.
-
-Reading across years shows that global happiness is not evenly distributed, but the center of the distribution gradually trends upwards. The median life evaluation score rises over time, and the upper quartile also moves higher. The long vertical ranges show that the gab between the highest and lowest-scoring coutnreis remain large in every year. As the typical country improves, global happiness inequality does not seem to disappear. 
+<div class="hero">
+</div>
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
@@ -124,16 +163,36 @@ const happy = buildHappy(HAPPINESS);
 // Pass the processed data to the chart
 display(await CandleChart(happy, width));
 ```
+</div>
 
+<div class="hero">
+</div>
+
+<section class="intro-card">
+  <p>
+    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show how the story has <i>evolved</i>.
+  </p>
+  <p>
+    Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness. The color represents if the median when up (green) or down (red) from the previous year. Each bar shows a distribution for one year, from 2011–2025. Similarly, hover to see the change in values from the previous year.
+  </p>
+  <p>
+    See if you can tell which year 2019 is. Watch the change in median and low values over time.
+  </p>
+</section>
+
+<div class="hero">
 </div>
 
 ---
 
-## Connecting Migration to Happiness
+<!-- ## Connecting Migration to Happiness
 
 By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
 
-*(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)*
+*(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)* -->
+
+<div class="hero">
+</div>
 
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
@@ -152,16 +211,26 @@ const mvh = buildMigrationVsHappiness({ migData, happinessData, countryData });
 // Pass the processed data to the chart
 display(await migrationPlot(mvh, width));
 ```
+</div>
 
+<div class="hero">
+</div>
+
+<section class="intro-card">
+  <p>
+    By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
+  </p>
+  <p>
+    PLACEHOLDER
+  </p>
+</section>
+
+<div class="hero">
 </div>
 
 ---
 
-## Interactive Global Explorer
-
-Explore the data yourself. Use the interactive 3D globe below to select individual countries, view their specific happiness scores, and trace the direct migration vectors into and out of their borders.
-
-*(Placeholder: Give the user brief instructions. e.g., "Hover over a country to see its score, click to lock it in and view migration vectors, and use the search bar to find a specific nation.")*
+## Interactive Exploration
 
 <div class="card" style="display: flex; justify-content: center; background: #111; position: relative;">
 
@@ -196,10 +265,10 @@ const migration = buildMigration(MIGRATION);
 
 // BUILD CONFIG
 const preview = { 
-  width: width * 0.6,   // 1. Shrink the overall canvas to 70%
-  height: width * 0.6,  // 2. Keep it square
+  width: width,   // 1. Shrink the overall canvas to 70%
+  height: width * 0.7,  // 2. Keep it square
   radius: (width * 0.6) / 2, // 3. Base the radius on the new smaller width
-  gap: 20 
+  gap: 3 
 };
 
 const variables = {
@@ -218,14 +287,13 @@ const variables = {
   rays: {
     radius: { 
       inner: preview.radius * 0.55, // Keeps the rays touching the globe
-      // 1. CHANGE THIS: Bring the outer edge inward (e.g., multiply by 0.8)
-      outer: preview.radius * 0.8 
+      outer: preview.radius 
     },
     angle: 0.005,
     fonts: { labels: { size: 16 } },
     scale: {
       // 2. CHANGE THIS: Make sure the D3 scale matches your new outer limit
-      function: d3.scaleLinear().domain([0, 10]).range([preview.radius * 0.55, preview.radius * 0.8]),
+      function: d3.scaleLinear().domain([0, 10]).range([preview.radius * 0.55, preview.radius]),
       domain: [2, 10], values: [2, 4, 6, 8, 10], offset: 14
     },
     colors: {
@@ -260,20 +328,16 @@ display(myDashboard.svg.node());
 
 </div>
 
--- 
+<div class="globe-instructions">
 
-## How National Condititons Connect with Happiness
+*Two finger pan to rotate the globe  |  Pinch to zoom and for selection reticule  |  Hover for country name  |  Click countries for history  |  Rotate or click to change year  |  Select blue years for migration data  |  Double click to reset*
 
-TENTATIVE SUMMARY DON"T KNOW WHAT WILL GO HERE 
+</div>
 
-The visualizations of migration shows that the migrant stock is often directed toward countries with higher reports of well-being, but they do not explain why those countries score higher. 
-
-To better understnad what happiness scores may represent, we cmpare life evaluation with country-level conditions commonly discussed in the World Happiness Report, including economic output, life expectancy.....? etc
-
+---
 
 
 <style>
-
 
 /* Dashboard Hero Styling */
 .hero {
@@ -293,7 +357,7 @@ To better understnad what happiness scores may represent, we cmpare life evaluat
   font-size: 14vw;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
+  background: linear-gradient(30deg, #f5c036, #fffbe6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
