@@ -66,7 +66,7 @@ toc: false
 <p></p>
 <p><strong>Migration happens towards <i>happier</i> countries at about at nearly <u>four times greater a rate</u> than towards <i>less happy</i> countries.</strong></p>
 <p></p>
-<p>The chart shows an hints at a strong association between the happiness rating and migration—at least <i>in aggregate</i>.</p>
+<p>The chart shows an hints at a strong association between the happiness rating and migration—at least <i>in aggregate</i>. [1] [5]</p>
 
 </div>
 
@@ -102,7 +102,7 @@ display(await simpleBar(flowsData, width));
   <p></p>
   <p> Shown here is percentages of population migrating for each country in 2024, sorted from country with the lowest life evaluation score at the top to the highest at the bottom. Percentage of movement to less happy countries is also further broken out into immediately adjacent and non-immediately adjacent countries.</p>
   <p></p>
-  <p><strong>The lower the life evluation seen, the greater the choice is clear: a <i>happier country</i> or an <i>immediately adjacent country</i>. For happier countries, the choice of movement doesn't seem to be nearly as limited by adjacency.</strong></p>
+  <p><strong>The lower the life evluation seen, the greater the choice is clear: a <i>happier country</i> or an <i>immediately adjacent country</i>. For happier countries, the choice of movement doesn't seem to be nearly as limited by adjacency. [1] [3] [5]</strong></p>
 </div>
 
 <div class="card dark-chart-card">
@@ -151,7 +151,7 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
   Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness.
 </p>
 <p>
-  See if you can tell which year 2019 is. Hover to see change in median and low values over time.
+  See if you can tell which year 2019 is. Hover to see change in median and low values over time. [1]
 </p>
 </div>
 
@@ -176,10 +176,8 @@ display(await CandleChart(happy, width));
 </div>
 </section>
 
-
 <div class="hero">
 </div>
-<!-- </section> -->
 
 ---
 
@@ -200,6 +198,12 @@ const mvhData = await FileAttachment("./data/migration_vs_happiness_clean.csv").
 // Pass directly to the chart
 display(migrationPlot(mvhData, width));
 ```
+</div>
+
+<div class="globe-instructions">
+
+[1] [2] [3] [4] [6]
+
 </div>
 
 <div class="hero">
@@ -310,12 +314,23 @@ display(myDashboard.svg.node());
 
 <div class="globe-instructions">
 
-*Two finger pan to rotate the globe  |  Pinch to zoom and for selection reticule  |  Hover for country name  |  Click countries for history  |  Rotate or click to change year  |  Select blue years for migration data  |  Double click to reset*
+*Two finger pan to rotate the globe  |  Pinch to zoom and for selection reticule  |  Hover for country name  |  Click countries for history  |  Rotate or click to change year  |  Select blue years for migration data  |  Double click to reset* [1]
 
 </div>
 
 ---
 
+
+<div>
+
+[1] [World Happiness Report](https://data.worldhappiness.report/)  
+[2] [United Nations](https://www.un.org/development/desa/pd/content/international-migrant-stock)  
+[3] [World Bank](https://data.worldbank.org/indicator/SP.POP.TOT)  
+[4] [World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)  
+[5] [P1sec/country_adjacency](https://github.com/P1sec/country_adjacency)  
+[6] [PLACEHOLDER]()
+
+</div>
 
 <style>
 
