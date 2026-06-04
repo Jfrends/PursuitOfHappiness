@@ -142,16 +142,17 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 </section>
 
 ---
-<section class="section-grid candle-section">
-<div class="section-copy callout-card">
+<section class="section-grid">
+<div class="section-copy">
+<h2>Over Time</h2>
 <p>
-    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show <i>shifts</i>.
+  How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show <i>shifts</i>.
   </p>
 <p>
-  Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness.
+  Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness. [1]
 </p>
 <p>
-  See if you can tell which year 2019 is. Hover to see change in median and low values over time. [1]
+  <strong>See if you can tell which year 2019 is. Hover to see change in median and low values over time.</strong>
 </p>
 </div>
 
