@@ -18,8 +18,8 @@ export function simpleBar(happinessFlows, width = 600) {
     totalMigrants: Number(d.totalMigrants)
   }));
 
-  const chartWidth = Math.min(width * 0.78, 760);
-
+  const chartWidth = Math.min(width * 0.55, 680);
+  
   return vl
     .layer(
       vl

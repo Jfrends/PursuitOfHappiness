@@ -6,10 +6,6 @@ toc: false
   <h1>Chasing Happiness</h1>
   <h2>Exploring the relationship between a country's life evaluation score and human migration patterns around the world.</h2>
 </div>
-To begin, let's look at the absolute volume of migration flows categorized by happiness levels. Do people generally move toward happier countries? 
-
-The total volume of migration toward happier countries, that is, countries with the higher life evaluation score, is substantially larger than the volume moving away from happier countries. The pattern suggests that many high-migration destinations are also countries who score higher on the World Happiness Reports's 0-10 life evaluation scale. Although the visualization is not meant to imply a causation, the association between happiness and migration patterns. A higher life evaluation score which summarizes country-level conditions may also affect migration decisions, such as political stability, economic opportunity, safety, and other factors. Allowing this to be our starting point, we see that migration flows are not randomly distributed across the global happiness landscape.
-
 
 
 <section class="section-grid">
@@ -22,7 +18,7 @@ The total volume of migration toward happier countries, that is, countries with 
 
 <p><strong>Takeaway:</strong> In the joined dataset, migrant stock toward happier countries is about 3.8× larger than migrant stock toward less happy countries.</p>
 
-<p>The chart does not prove that happiness causes migration. Instead, it shows an aggregate association: migration is not evenly distributed across the global happiness landscape. Countries with higher life evaluations may also have other conditions that attract migrants, such as stronger economies, greater political stability, safer living conditions, better public services, or established migrant communities.</p>
+<p>The chart shows an aggregate association between the happiness rating and migration: migration is not evenly distributed across the global happiness landscape. Countries with higher life evaluations are likely to contain also have other conditions that attract migrants, such as stronger economies, greater political stability, or safer living conditions</p>
 
 </div>
 
