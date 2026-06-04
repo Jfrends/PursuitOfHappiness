@@ -359,7 +359,7 @@ display(myDashboard.svg.node());
 [3] [World Bank](https://data.worldbank.org/indicator/SP.POP.TOT)  
 [4] [World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)  
 [5] [P1sec/country_adjacency](https://github.com/P1sec/country_adjacency)  
-[6] [PLACEHOLDER]()
+[6] [OurWorldInData](https://ourworldindata.org/)
 
 </div>
 
