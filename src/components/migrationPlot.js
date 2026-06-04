@@ -2,15 +2,49 @@ import * as d3 from 'npm:d3';
 
 export function migrationPlot(migrationVsHappiness, width) {
   const height = 500;
-  const margin = { top: 60, right: 150, bottom: 50, left: 60 }; 
-
+  const margin = { top: 95, right: 150, bottom: 55, left: 70 };
   // 1. Metric Configurations
   const metricsConfig = {
-    gdp_per_capita: { label: 'GDP per Capita', scaleType: 'log', format: d3.format(',.0f') },
-    life_expectancy: { label: 'Life Expectancy (Years)', scaleType: 'linear', format: d3.format('.1f') },
-    migration_ratio: { label: 'Migration Ratio', scaleType: 'log', format: d3.format('~g') },
-    interpersonal_trust: { label: 'Interpersonal Trust (%)', scaleType: 'linear', format: d3.format('.1f') },
-    gini_coefficient: { label: 'Income Inequality (Gini)', scaleType: 'linear', format: d3.format('.3f') }
+    gdp_per_capita: {
+      label: 'GDP per Capita',
+      shortLabel: 'GDP per capita',
+      scaleType: 'log',
+      format: d3.format(',.0f'),
+      title: 'GDP per capita and happiness',
+      subtitle: 'Do countries with higher GDP per capita also report higher life evaluation scores?'
+    },
+    life_expectancy: {
+      label: 'Life Expectancy (Years)',
+      shortLabel: 'life expectancy',
+      scaleType: 'linear',
+      format: d3.format('.1f'),
+      title: 'Life expectancy and happiness',
+      subtitle: 'Do countries with longer life expectancy also report higher life evaluation scores?'
+    },
+    migration_ratio: {
+      label: 'Migration Ratio',
+      shortLabel: 'migration ratio',
+      scaleType: 'log',
+      format: d3.format('~g'),
+      title: 'Migration ratio and happiness',
+      subtitle: 'Do countries with higher migration ratios also tend to have higher life evaluation scores?'
+    },
+    interpersonal_trust: {
+      label: 'Interpersonal Trust (%)',
+      shortLabel: 'interpersonal trust',
+      scaleType: 'linear',
+      format: d3.format('.1f'),
+      title: 'Interpersonal trust and happiness',
+      subtitle: 'Do countries with higher reported trust also tend to report higher life evaluation scores?'
+    },
+    gini_coefficient: {
+      label: 'Income Inequality (Gini)',
+      shortLabel: 'income inequality',
+      scaleType: 'linear',
+      format: d3.format('.3f'),
+      title: 'Income inequality and happiness',
+      subtitle: 'How does income inequality relate to national life evaluation scores?'
+    }
   };
 
   const rows = migrationVsHappiness;
@@ -114,6 +148,26 @@ export function migrationPlot(migrationVsHappiness, width) {
     .attr('height', height)
     .attr('fill', '#111');
 
+    const chartTitle = svg.append('text')
+    .attr('x', margin.left)
+    .attr('y', 28)
+    .attr('fill', '#f2f2f2')
+    .attr('font-size', 22)
+    .attr('font-weight', 700);
+  
+  const chartSubtitle = svg.append('text')
+    .attr('x', margin.left)
+    .attr('y', 50)
+    .attr('fill', '#bdbdbd')
+    .attr('font-size', 13);
+  
+  const chartContext = svg.append('text')
+    .attr('x', margin.left)
+    .attr('y', 70)
+    .attr('fill', '#f5c036')
+    .attr('font-size', 13)
+    .attr('font-weight', 600);
+
   // Base Y Scale (Static)
   const yWithMargin = d3.scaleLinear()
     .domain([0, 10])
@@ -206,6 +260,14 @@ export function migrationPlot(migrationVsHappiness, width) {
   // Added 'speed' parameter so we can tell it to go fast when scrubbing!
   function updateChart(speed = transitionSpeed) {
     const config = metricsConfig[currentMetric];
+
+    chartTitle.text(`${config.title}, ${currentYear}`);
+
+    chartSubtitle.text(config.subtitle);
+
+    chartContext.text(
+      `X-axis: ${config.label} · Y-axis: Life Evaluation Score (0–10) · Each point represents one country`
+    );
     
     const allValidRows = rows.filter((d) => {
       const xVal = d[currentMetric];
@@ -239,8 +301,11 @@ export function migrationPlot(migrationVsHappiness, width) {
       .call((g) => g.selectAll('.tick text').attr('fill', 'white'))
       .call((g) => g.selectAll('.domain, .tick line').attr('stroke', 'white'));
 
-    xLabel.text(config.label);
-
+    xLabel.text(
+        config.scaleType === 'log'
+          ? `${config.label} (log scale)`
+          : config.label
+    );
     const currentRows = allValidRows.filter(d => +d.Year === +currentYear && !isNaN(+d.life_evaluation));
 
     // Bind Data to Scatter Dots
@@ -268,7 +333,7 @@ export function migrationPlot(migrationVsHappiness, width) {
                   <img src="https://flagcdn.com/w40/${alpha2}.png" style="width: 30px; height: auto; border: 1px solid #ddd;"/>
                 </div>
                 <div style="border-top: 1px solid #eee; margin: 6px 0;"></div>
-                <div>${config.label}: <strong>${d3.format(',.3f')(d[currentMetric])}</strong></div>
+                <div>${config.label}: <strong>${config.format(+d[currentMetric])}</strong></div>
                 <div>Life Evaluation: <strong>${d3.format('.2f')(d.life_evaluation)}</strong></div>
               `);
           })
@@ -307,8 +372,7 @@ export function migrationPlot(migrationVsHappiness, width) {
     }
     yearIndex = +this.value;
     currentYear = availableYears[yearIndex];
-    yearDisplay.text(currentYear);
-    
+    yearDisplay.text(`Year: ${currentYear}`);    
     // Instead of doing manual transition math here, just call updateChart 
     // and tell it to go really fast (50ms)!
     updateChart(50);
@@ -323,7 +387,7 @@ export function migrationPlot(migrationVsHappiness, width) {
       return;
     }
     currentYear = availableYears[yearIndex];
-    yearDisplay.text(currentYear);
+    yearDisplay.text(`Year: ${currentYear}`);
     scrubber.property('value', yearIndex); 
     updateChart(); // Uses default speed (600ms)
   }
