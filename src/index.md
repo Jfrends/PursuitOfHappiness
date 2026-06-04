@@ -170,7 +170,7 @@ const HAPPINESS = processHappiness(rawHappinessData);
 const happy = buildHappy(HAPPINESS);
 
 // Pass the processed data to the chart
-display(await CandleChart(happy, width));
+display(await CandleChart(happy, { width: Math.min(width * 0.58, 800) }));
 ```
 
 </div>
@@ -354,15 +354,6 @@ display(myDashboard.svg.node());
 </section>
 
 
-[1] [World Happiness Report](https://data.worldhappiness.report/)  
-[2] [United Nations](https://www.un.org/development/desa/pd/content/international-migrant-stock)  
-[3] [World Bank](https://data.worldbank.org/indicator/SP.POP.TOT)  
-[4] [World Bank](https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD)  
-[5] [P1sec/country_adjacency](https://github.com/P1sec/country_adjacency)  
-[6] [OurWorldInData](https://ourworldindata.org/economic-inequality)  
-[7] [OurWorldInData](https://ourworldindata.org/life-expectancy)  
-[8] [OurWorldInData](https://ourworldindata.org/trust)  
-  
 ---
 
 <section class="sources-card" id="sources">
