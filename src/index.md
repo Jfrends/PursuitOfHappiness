@@ -199,17 +199,12 @@ By directly plotting migration volumes against happiness scores, we can see if t
 
 ```js
 import { migrationPlot } from "./components/migrationPlot.js";
-import { buildMigrationVsHappiness } from "./data/migrationVsHappiness.js"
 
-const migData = await FileAttachment("./data/migration.csv").csv({ typed: true });
-const happinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
-const countryData = await FileAttachment("./data/country_codes.csv").csv({ typed: true });
+// Load the pre-processed data outputted by the data loader
+const mvhData = await FileAttachment("./data/migration_vs_happiness_clean.csv").csv({ typed: true });
 
-// Process the raw datasets into the flows array
-const mvh = buildMigrationVsHappiness({ migData, happinessData, countryData });
-
-// Pass the processed data to the chart
-display(await migrationPlot(mvh, width));
+// Pass directly to the chart
+display(migrationPlot(mvhData, width));
 ```
 </div>
 
