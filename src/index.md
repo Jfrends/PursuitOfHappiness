@@ -41,11 +41,11 @@ toc: false
   </p>
 
   <p>
-    This article explores the relationship between national happiness and international migration. We use life evaluation scores from the World Happiness Report, where respondents rate their lives on a 0–10 scale. We then compare those scores with international migration data, seeing where people choose to go...
+    This article explores the relationship between national happiness and international migration. We use life evaluation scores from the World Happiness Report, where respondents rate their lives on a 0–10 scale. We then compare those scores with international migration data, seeing where people choose to go in ...
   </p>
 
   <p>
-  <i>...in the pursuit of happiness</i>.
+  <i>... the pursuit of happiness</i>.
   </p>
 </section>
 
@@ -322,6 +322,20 @@ display(myDashboard.svg.node());
 
 ---
 
+
+<section class="intro-card">
+  <p>
+    It's all too easy to get lost in arguments surrounding immigration over <i>should</i> and <i>could</i>, <i>pro</i> and <i>con</i>, <i>this side</i> or <i>that</i>. All of these things get away from the simple truth that people largely chase happiness (or at least, escape from unhappiness), as seen above. And that happiness is tied to many separate characteristics of a country, all of which come together to form a country's happiness—not always in equal proportions and not always fully formed by these metrics.
+  </p>
+
+  <p>
+    This, the takeaway from this graphic is simple: Remember *why* people move: for reasons we hold to be self-evident—for reasons we hold to be <i>unalienable</i>. <i>Life</i>, <i>liberty</i>, and ...
+  </p>
+
+  <p>
+  <i>... the pursuit of happiness</i>.
+  </p>
+</section>
 
 <div>
 
