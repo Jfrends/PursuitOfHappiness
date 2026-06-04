@@ -1,12 +1,23 @@
 import * as d3 from "npm:d3";
 
 export function CandleChart(happy, { width = 800 } = {}) {
+
+  const font = {
+    title: 22,
+    subtitle: 15,
+    axis: 14,
+    axisLabel: 15,
+    legend: 13,
+    tooltip: 14,
+    tooltipTitle: 18
+  }
+
   const w = width;
   const h = width / 2.5;
   const marginTop = 65;
   const marginRight = 30;
-  const marginBottom = 30;
-  const marginLeft = 40;
+  const marginBottom = 45;
+  const marginLeft = 55;
 
   // Compute per-year stats
   const years = [...new Set(happy.map(d => d.Year))].sort((a, b) => a - b);
@@ -57,7 +68,7 @@ export function CandleChart(happy, { width = 800 } = {}) {
       .style("border", "1px solid #ccc")
       .style("border-radius", "8px")
       .style("padding", "8px 12px")
-      .style("font", "13px/1.5 sans-serif")
+      .style("font", `${font.tooltip}px/1.5 sans-serif`)
       .style("box-shadow", "0 2px 6px rgba(0,0,0,0.15)")
       .style("z-index", "10");
 
@@ -123,7 +134,9 @@ export function CandleChart(happy, { width = 800 } = {}) {
   svg.append("g")
       .attr("transform", `translate(${marginLeft},0)`)
       .call(d3.axisLeft(y))
-      .call(g => g.selectAll("text").attr("fill", "white"))
+      .call(g => g.selectAll("text")
+        .attr("fill", "#d8d8d8")
+        .attr("font-size", font.axis))
       .call(g => g.selectAll(".tick line").clone()
           .attr("stroke", "white")
           .attr("stroke-opacity", 0.2)
@@ -201,7 +214,7 @@ export function CandleChart(happy, { width = 800 } = {}) {
     .call(g => g.select(".domain").attr("stroke", "#777"))
     .call(g => g.selectAll("text")
       .attr("fill", "#d8d8d8")
-      .attr("font-size", 11)
+      .attr("font-size", font.axis)
       .attr("dy", "1.2em"));
 
   svg.append("text")
@@ -210,14 +223,14 @@ export function CandleChart(happy, { width = 800 } = {}) {
     .attr("y", 12)
     .attr("text-anchor", "middle")
     .attr("fill", "#d8d8d8")
-    .attr("font-size", 12)
+    .attr("font-size", font.axisLabel)
     .text("Life evaluation score");
 
   svg.append("text")
     .attr("x", marginLeft)
     .attr("y", 18)
     .attr("fill", "#f2f2f2")
-    .attr("font-size", 17)
+    .attr("font-size", font.title)
     .attr("font-weight", 700)
     .text("Global happiness distribution by year");
 
@@ -253,7 +266,7 @@ export function CandleChart(happy, { width = 800 } = {}) {
       .attr("x", 10)
       .attr("y", 4)
       .attr("fill", "#bdbdbd")
-      .attr("font-size", 10)
+      .attr("font-size", font.legend)
       .text(d => d[1]);
   // Return the wrapper div containing the chart and tooltip
   return container.node();
