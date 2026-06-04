@@ -13,6 +13,8 @@ To begin, let's look at the absolute volume of migration flows categorized by ha
 
 *(Placeholder: Add your analysis or context about what this bar chart specifically highlights regarding net migration patterns.)*
 
+<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
+
 ```js
 import { simpleBar } from "./components/simpleBar.js";
 import { buildHappinessFlows } from "./data/happinessFlows.js"; 
@@ -27,6 +29,8 @@ const flowsData = buildHappinessFlows({ migrationData, happinessData });
 display(await simpleBar(flowsData, width));
 ```
 
+</div>
+
 ---
 
 ## Regional & Adjacent Disparities
@@ -34,6 +38,8 @@ display(await simpleBar(flowsData, width));
 While global trends tell one story, regional neighbors often have stark contrasts. The chart below examines countries alongside their geographic neighbors to identify localized migration drivers.
 
 *(Placeholder: Explain what the adjacency chart demonstrates. For example, mention how disparities in GDP or social support between bordering nations trigger regional movement.)*
+
+<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
 ```js
 import { AdjacentPlot } from "./components/adjacentPlot.js";
@@ -65,6 +71,8 @@ const selectedYear = 2024;
 display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 ```
 
+</div>
+
 ---
 
 ## The Happiness Distribution
@@ -72,6 +80,8 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 How wide is the gap between the happiest and least happy populations? This candle chart visualizes the distribution and variance of life evaluation scores across different regions.
 
 *(Placeholder: Provide context on the spread of the data. Are certain continents tightly clustered together, while others show massive inequality in life evaluation?)*
+
+<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
 ```js
 import { CandleChart } from "./components/candleChart.js";
@@ -89,6 +99,8 @@ const happy = buildHappy(HAPPINESS);
 display(await CandleChart(happy, width));
 ```
 
+</div>
+
 ---
 
 ## Connecting Migration to Happiness
@@ -96,6 +108,8 @@ display(await CandleChart(happy, width));
 By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
 
 *(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)*
+
+<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
 ```js
 import { migrationPlot } from "./components/migrationPlot.js";
@@ -112,6 +126,8 @@ const mvh = buildMigrationVsHappiness({ migData, happinessData, countryData });
 display(await migrationPlot(mvh, width));
 ```
 
+</div>
+
 ---
 
 ## Interactive Global Explorer
@@ -121,8 +137,6 @@ Explore the data yourself. Use the interactive 3D globe below to select individu
 *(Placeholder: Give the user brief instructions. e.g., "Hover over a country to see its score, click to lock it in and view migration vectors, and use the search bar to find a specific nation.")*
 
 <div class="card" style="display: flex; justify-content: center; background: #111; position: relative;">
-  <span id="viz-container"></span>
-</div>
 
 ```js
 // IMPORTS
@@ -155,9 +169,9 @@ const migration = buildMigration(MIGRATION);
 
 // BUILD CONFIG
 const preview = { 
-  width: width, 
-  height: width, 
-  radius: width / 2, 
+  width: width * 0.6,   // 1. Shrink the overall canvas to 70%
+  height: width * 0.6,  // 2. Keep it square
+  radius: (width * 0.6) / 2, // 3. Base the radius on the new smaller width
   gap: 20 
 };
 
@@ -175,11 +189,16 @@ const variables = {
     stroke: { outline: 3.5, borders: 0.5, graticule: 0.5, opacity: 0.75 }
   },
   rays: {
-    radius: { inner: preview.radius * 0.55, outer: preview.radius - preview.gap },
+    radius: { 
+      inner: preview.radius * 0.55, // Keeps the rays touching the globe
+      // 1. CHANGE THIS: Bring the outer edge inward (e.g., multiply by 0.8)
+      outer: preview.radius * 0.8 
+    },
     angle: 0.005,
     fonts: { labels: { size: 16 } },
     scale: {
-      function: d3.scaleLinear().domain([0, 10]).range([preview.radius * 0.55, preview.radius]),
+      // 2. CHANGE THIS: Make sure the D3 scale matches your new outer limit
+      function: d3.scaleLinear().domain([0, 10]).range([preview.radius * 0.55, preview.radius * 0.8]),
       domain: [2, 10], values: [2, 4, 6, 8, 10], offset: 14
     },
     colors: {
@@ -211,6 +230,8 @@ const searchBar = new Search(myDashboard.globe, myDashboard.svg.node().parentNod
 
 display(myDashboard.svg.node());
 ```
+
+</div>
 
 <style>
 /* Dashboard Hero Styling */
