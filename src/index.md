@@ -142,22 +142,11 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 </section>
 
 ---
-<!-- HAPPINESS DISTRIBUTION CANDLE CHART -->
-<section class="section-grid candle-section">
-<div class="section-copy callout-card">
-<h2>Happiness Distribution Over Time</h2>
-<p>
-    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show how the story has <i>evolved</i>.
-  </p>
-<p>
-  Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness. The color represents if the median when up (green) or down (red) from the previous year. Each bar shows a distribution for one year, from 2011–2025. Similarly, hover to see the change in values from the previous year.
-</p>
-<p>
-  See if you can tell which year 2019 is. Watch the change in median and low values over time.
-</p>
+
+<div class="hero">
 </div>
 
-<div class="card dark-chart-card">
+<div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
 ```js
 import { CandleChart } from "./components/candleChart.js";
@@ -174,14 +163,25 @@ const happy = buildHappy(HAPPINESS);
 // Pass the processed data to the chart
 display(await CandleChart(happy, width));
 ```
-
 </div>
-</section>
-
 
 <div class="hero">
 </div>
-<!-- </section> -->
+
+<section class="intro-card">
+  <p>
+    How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show how the story has <i>evolved</i>.
+  </p>
+  <p>
+    Here a stock market chart shows distribution, with the thin white bar representing the range from lowest to highest score, the pill representing the quartile range, and the dot representing median happiness. The color represents if the median when up (green) or down (red) from the previous year. Each bar shows a distribution for one year, from 2011–2025. Similarly, hover to see the change in values from the previous year.
+  </p>
+  <p>
+    See if you can tell which year 2019 is. Watch the change in median and low values over time.
+  </p>
+</section>
+
+<div class="hero">
+</div>
 
 ---
 
