@@ -11,7 +11,7 @@ toc: false
 
 To begin, let's look at the absolute volume of migration flows categorized by happiness levels. Do people generally move toward happier countries? 
 
-*(Placeholder: Add your analysis or context about what this bar chart specifically highlights regarding net migration patterns.)*
+The total volume of migration toward happier countries, that is, countries with the higher life evaluation score, is substantially larger than the volume moving away from happier countries. The pattern suggests that many high-migration destinations are also countries who score higher on the World Happiness Reports's 0-10 life evaluation scale. Although the visualizaiton is not meant to imply a causation, the association between happiness and migration patterns. A higher life evaluation score which summarizes country-level conditions may also affect migration decisions, such as political stability, economic opportunity, safety, and other factors. Allowing this to be our starting point, we see that migration flows are not randomly distributed across the global happiness landscape.
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
@@ -37,7 +37,7 @@ display(await simpleBar(flowsData, width));
 
 While global trends tell one story, regional neighbors often have stark contrasts. The chart below examines countries alongside their geographic neighbors to identify localized migration drivers.
 
-*(Placeholder: Explain what the adjacency chart demonstrates. For example, mention how disparities in GDP or social support between bordering nations trigger regional movement.)*
+This chart breaks migration into four categories: people staying within the same country, people moving to a happier country, people moving to a less happy adjacent country, and people moving to a less happy non-adjacent country. The adjacent/non-adjacent distinction is significant because nearby countries can differ heavily in life evaluation, despite being connected by borders. A move to a neighboring country with a lower happiness score does not necessarily imply that it is irrational; it may still reflect things like lower travel costs, easier entry, temporary displaement, and others. By separating adjacent and non-adjacent movement, the shart shows that migration can be understood both geographically and statistically: that the direction of movement is related to happiness differences and also proximity. 
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
@@ -79,7 +79,9 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 
 How wide is the gap between the happiest and least happy populations? This candle chart visualizes the distribution and variance of life evaluation scores across different regions.
 
-*(Placeholder: Provide context on the spread of the data. Are certain continents tightly clustered together, while others show massive inequality in life evaluation?)*
+Each of the candlesticks in this chart summarizes the distribution of country-level life evaluation scores for a single year from 2011 to 2025. The thin vertical line shows the full range from the lowest-scoring country from Q1 to Q3, and the black dot marks the median country score. The color indicates whether the overlal distribution improved or declined compared with the previous year.
+
+Reading across years shows that global happiness is not evenly distributed, but the center of the distribution gradually trends upwards. The median life evaluation score rises over time, and the upper quartile also moves higher. The long vertical ranges show that the gab between the highest and lowest-scoring coutnreis remain large in every year. As the typical country improves, global happiness inequality does not seem to disappear. 
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
@@ -108,6 +110,7 @@ display(await CandleChart(happy, width));
 By directly plotting migration volumes against happiness scores, we can see if the expected correlation holds true. Does a higher happiness score reliably predict a higher net influx of migrants?
 
 *(Placeholder: Discuss the outliers in this scatter/migration plot. Are there incredibly happy countries with low immigration, or unhappy countries experiencing an unexpected influx?)*
+
 
 <div class="card" style="display: flex; justify-content: center; background: #111; overflow: visible;">
 
