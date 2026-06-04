@@ -152,14 +152,14 @@ export function migrationPlot(migrationVsHappiness, width) {
     .attr('x', margin.left)
     .attr('y', 28)
     .attr('fill', '#f2f2f2')
-    .attr('font-size', 22)
+    .attr('font-size', 26)
     .attr('font-weight', 700);
   
   const chartSubtitle = svg.append('text')
     .attr('x', margin.left)
     .attr('y', 50)
     .attr('fill', '#bdbdbd')
-    .attr('font-size', 13);
+    .attr('font-size', 16);
   
   const chartContext = svg.append('text')
     .attr('x', margin.left)
