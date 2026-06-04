@@ -98,8 +98,6 @@ export function simpleBar(happinessFlows, width = 600) {
     .height(300)
     .title({
       text: "Migrant stock is higher toward countries with higher life evaluations",
-      subtitle:
-        "Destination countries are grouped by whether their happiness score is higher or lower than the origin country’s score.",
       anchor: "start",
       fontSize: 17,
       subtitleFontSize: 12,

@@ -4,9 +4,22 @@ toc: false
 
 <div class="hero">
   <h1>Chasing Happiness</h1>
-  <h2>Exploring the relationship between a country's life evaluation score and human migration patterns around the world.</h2>
+  <h2><h2>Exploring how national happiness varies across the world, how people migrate through that landscape, and whether migration patterns tend to point toward countries with higher reported well-being.</h2></h2>
 </div>
 
+<section class="intro-card">
+  <p>
+    We often hear of happiness as a personal feeling, something to attain, and it is simply found in ones personal way of living. However, national life evaluation scores show that well-being also has a geographic and social pattern. Some countries consistently report higher average life satisfaction than others, and those differences raise an important question: how do people move through a world filled with so many discrepencies?
+  </p>
+
+  <p>
+    This article explores the relationship between national happiness and international migration. We use life evaluation scores from the World Happiness Report, where respondents rate their lives on a 0–10 scale. We then compare those scores with international migrant stock data showing where migrants live relative to their countries of origin.
+  </p>
+
+  <p>
+    Rather than claiming that happiness directly causes migration, we ask a more careful question: when people move across borders, are they moving toward countries with higher reported well-being?
+  </p>
+</section>
 
 <section class="section-grid">
 
@@ -248,41 +261,8 @@ display(myDashboard.svg.node());
 </div>
 
 <style>
-.section-grid {
-  display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(520px, 1.4fr);
-  gap: 2rem;
-  align-items: center;
-  margin: 3rem 0 4rem;
-}
 
-.section-copy {
-  max-width: 42rem;
-}
 
-.section-copy p {
-  line-height: 1.65;
-}
-
-.section-copy strong {
-  color: #f5c036;
-}
-
-.dark-chart-card {
-  display: flex;
-  justify-content: center;
-  background: #111;
-  overflow: visible;
-  padding: 1.25rem;
-  border-radius: 12px;
-  border: 1px solid #2a2a2a;
-}
-
-@media (max-width: 900px) {
-  .section-grid {
-    grid-template-columns: 1fr;
-  }
-}
 /* Dashboard Hero Styling */
 .hero {
   display: flex;
@@ -316,6 +296,63 @@ display(myDashboard.svg.node());
   line-height: 1.5;
   color: var(--theme-foreground-muted);
 }
+
+.section-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(520px, 1.4fr);
+  gap: 2rem;
+  align-items: center;
+  margin: 3rem 0 4rem;
+}
+
+.section-copy {
+  max-width: 42rem;
+}
+
+.section-copy p {
+  line-height: 1.65;
+}
+
+.section-copy strong {
+  color: #f5c036;
+}
+@media (max-width: 900px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dark-chart-card {
+  display: flex;
+  justify-content: center;
+  background: #111;
+  overflow: visible;
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #2a2a2a;
+}
+.intro-card {
+  max-width: 760px;
+  margin: -1.5rem auto 4rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid #f5c036;
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 12px;
+  color: var(--theme-foreground);
+}
+
+.intro-card p {
+  margin: 0 0 1rem;
+  line-height: 1.7;
+  font-size: 17px;
+}
+
+.intro-card p:last-child {
+  margin-bottom: 0;
+  color: #f5c036;
+  font-weight: 650;
+}
+
 
 @media (min-width: 640px) {
   .hero h1 {
