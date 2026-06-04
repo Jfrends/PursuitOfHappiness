@@ -6,12 +6,25 @@ toc: false
   <h1>Chasing Happiness</h1>
   <h2>Exploring the relationship between a country's life evaluation score and human migration patterns around the world.</h2>
 </div>
-
-## Happiness Flows Overview
-
 To begin, let's look at the absolute volume of migration flows categorized by happiness levels. Do people generally move toward happier countries? 
 
 The total volume of migration toward happier countries, that is, countries with the higher life evaluation score, is substantially larger than the volume moving away from happier countries. The pattern suggests that many high-migration destinations are also countries who score higher on the World Happiness Reports's 0-10 life evaluation scale. Although the visualization is not meant to imply a causation, the association between happiness and migration patterns. A higher life evaluation score which summarizes country-level conditions may also affect migration decisions, such as political stability, economic opportunity, safety, and other factors. Allowing this to be our starting point, we see that migration flows are not randomly distributed across the global happiness landscape.
+
+
+
+<section class="section-grid">
+
+<div class="section-copy">
+
+<h2>Happiness Flows Overview</h2>
+
+<p>To begin, we compare international migrant stock by whether migrants are living in countries with higher or lower life evaluation scores than their countries of origin. In this chart, movement “toward happier countries” means that the destination country has a higher World Happiness Report life evaluation score than the origin country. Movement “toward less happy countries” means that the destination country has a lower life evaluation score than the origin country.</p>
+
+<p><strong>Takeaway:</strong> In the joined dataset, migrant stock toward happier countries is about 3.8× larger than migrant stock toward less happy countries.</p>
+
+<p>The chart does not prove that happiness causes migration. Instead, it shows an aggregate association: migration is not evenly distributed across the global happiness landscape. Countries with higher life evaluations may also have other conditions that attract migrants, such as stronger economies, greater political stability, safer living conditions, better public services, or established migrant communities.</p>
+
+</div>
 
 <div class="card dark-chart-card">
 
@@ -22,14 +35,16 @@ import { buildHappinessFlows } from "./data/happinessFlows.js";
 const migrationData = await FileAttachment("./data/migration.csv").csv({ typed: true });
 const happinessData = await FileAttachment("./data/happiness2026.csv").csv({ typed: true });
 
-// Process the raw datasets into the flows array
 const flowsData = buildHappinessFlows({ migrationData, happinessData });
 
-// Pass the processed data to the chart
 display(await simpleBar(flowsData, width));
 ```
 
 </div>
+
+</section>
+
+
 
 ---
 
@@ -237,6 +252,26 @@ display(myDashboard.svg.node());
 </div>
 
 <style>
+.section-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(520px, 1.4fr);
+  gap: 2rem;
+  align-items: center;
+  margin: 3rem 0 4rem;
+}
+
+.section-copy {
+  max-width: 42rem;
+}
+
+.section-copy p {
+  line-height: 1.65;
+}
+
+.section-copy strong {
+  color: #f5c036;
+}
+
 .dark-chart-card {
   display: flex;
   justify-content: center;
@@ -245,6 +280,12 @@ display(myDashboard.svg.node());
   padding: 1.25rem;
   border-radius: 12px;
   border: 1px solid #2a2a2a;
+}
+
+@media (max-width: 900px) {
+  .section-grid {
+    grid-template-columns: 1fr;
+  }
 }
 /* Dashboard Hero Styling */
 .hero {
