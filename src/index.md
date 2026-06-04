@@ -1,5 +1,5 @@
 ---
-toc: false
+toc: true
 ---
 
 <style>
@@ -59,7 +59,7 @@ toc: false
 
 <div class="section-copy">
 
-<h2>Migration Flow</h2>
+## Migration Flow
 <p></p>
 <p>We compare international migrant stock by whether migrants are living in countries with higher or lower life evaluation scores than their countries of origin to start. In this chart, movement “toward happier countries” means that the destination country has a higher World Happiness Report life evaluation score than the origin country. Movement “toward less happy countries” means that the destination country has a lower life evaluation score than the origin country.</p>
 <p></p>
@@ -92,7 +92,7 @@ display(await simpleBar(flowsData, width));
 <section class="section-grid">
 
 <div class="section-copy">
-  <h2>Disaggregated</h2>
+  <h2>Migration Direction by Country</h2>
   <p></p>
   <p> Shown here is percentages of population migrating for each country in 2024, sorted from country with the lowest life evaluation score at the top to the highest at the bottom. Percentage of movement to less happy countries is also further broken out into immediately adjacent and non-immediately adjacent countries.</p>
   <p></p>
@@ -143,7 +143,7 @@ display(AdjacentPlot(adjacent, { width: width, year: selectedYear }));
 
 <section class="section-grid">
 <div class="section-copy">
-<h2>Over Time</h2>
+<h2>Happiness Over Time</h2>
 <p>
   How wide has the gap been between the happiest and least happy populations, over the years? Sometimes something as simple as distribution over time can show <i>shifts</i>.
   </p>
